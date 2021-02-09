@@ -13,7 +13,11 @@ app.use(express.json());
 require('./routes/apiRoutes')(app);
 require('./routes/htmlRoutes')(app);
 
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`App listening on PORT: ${PORT}`);
-});
+if (!process.env.JEST_WORKER_ID) {
+  app.listen(PORT, () => {
+    // eslint-disable-next-line no-console
+    console.log(`App is listening on PORT ${PORT}`);
+  });
+}
+
+module.exports = app;
