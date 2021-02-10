@@ -1,5 +1,13 @@
+const express = require('express');
 const supertest = require('supertest');
-const app = require('../../index'); // Link to your server file
+
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+require('../../routes/apiRoutes')(app);
+require('../../routes/htmlRoutes')(app);
 
 const request = supertest(app);
 
